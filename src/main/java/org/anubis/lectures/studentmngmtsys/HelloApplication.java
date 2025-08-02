@@ -33,12 +33,7 @@ public class HelloApplication extends Application {
         stage2.setTitle("I don't block anything");
         stage2.initModality(Modality.NONE);
         stage2.show();
-        // this window blocks everything - you can't interact
-        // with other windows while it's open
-        Stage stage3 = new Stage();
-        stage3.setTitle("I block everything");
-        stage3.initModality(Modality.APPLICATION_MODAL);
-        stage3.show();
+
         // this window blocks only interaction with it's owner window(stage1)
         Stage stage4 = new Stage();
         stage4.setTitle("I block only clicks to main window");
