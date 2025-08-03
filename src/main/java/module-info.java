@@ -10,7 +10,9 @@ module org.anubis.lectures.studentmngmtsys {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
-
+    requires java.prefs;
+    requires jakarta.xml.bind;
+    opens org.anubis.lectures.studentmngmtsys.util to jakarta.xml.bind;
     opens org.anubis.lectures.studentmngmtsys to javafx.fxml;
     exports org.anubis.lectures.studentmngmtsys;
 }

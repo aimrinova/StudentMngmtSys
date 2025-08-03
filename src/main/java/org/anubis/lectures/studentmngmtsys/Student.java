@@ -2,12 +2,14 @@ package org.anubis.lectures.studentmngmtsys;
 
 import java.time.LocalDate;
 
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import org.anubis.lectures.studentmngmtsys.util.LocalDateAdapter;
 
 public class Student {
     private final StringProperty firstName;
@@ -103,6 +105,7 @@ public class Student {
         return city;
     }
 
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getBirthday() {
         return birthday.get();
     }

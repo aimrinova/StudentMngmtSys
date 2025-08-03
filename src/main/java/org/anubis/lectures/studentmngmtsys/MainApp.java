@@ -1,5 +1,8 @@
 package org.anubis.lectures.studentmngmtsys;
 
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -11,8 +14,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.anubis.lectures.studentmngmtsys.util.StudentListWrapper;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.prefs.Preferences;
 
 public class MainApp extends Application {
 
@@ -77,6 +83,11 @@ public class MainApp extends Application {
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
+
+            // Give the controller access to the main app.
+            RootLayoutController controller = loader.getController();
+            controller.setMainApp(this);
+
             primaryStage.show();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -87,6 +98,13 @@ public class MainApp extends Application {
             alert.showAndWait();
             Platform.exit();
         }
+
+        // Try to load last opened student file.
+        File file = getStudentFilePath();
+        if (file != null) {
+            loadStudentDataFromFile(file);
+        }
+
     }
 
     /**
@@ -171,5 +189,104 @@ public class MainApp extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    /**
+     * Returns the Student file preference, i.e. the file that was last opened.
+     * The preference is read from the OS specific registry. If no such
+     * preference can be found, null is returned.
+     *
+     * @return
+     */
+    public File getStudentFilePath() {
+        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
+        String filePath = prefs.get("filePath", null);
+        if (filePath != null) {
+            return new File(filePath);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Sets the file path of the currently loaded file. The path is persisted in
+     * the OS specific registry.
+     *
+     * @param file the file or null to remove the path
+     */
+    public void setStudentFilePath(File file) {
+        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
+        if (file != null) {
+            prefs.put("filePath", file.getPath());
+
+            // Update the stage title.
+            primaryStage.setTitle("AddressApp - " + file.getName());
+        } else {
+            prefs.remove("filePath");
+
+            // Update the stage title.
+            primaryStage.setTitle("AddressApp");
+        }
+    }
+
+    /**
+     * Loads person data from the specified file. The current person data will
+     * be replaced.
+     *
+     * @param file
+     */
+    public void loadStudentDataFromFile(File file) {
+        try {
+            JAXBContext context = JAXBContext.newInstance(StudentListWrapper.class);
+            Unmarshaller um      = context.createUnmarshaller();
+
+            // Reading XML from the file and unmarshalling.
+            StudentListWrapper wrapper = (StudentListWrapper) um.unmarshal(file);
+
+            studentData.clear();
+            studentData.addAll(wrapper.getStudents());
+
+            // Save the file path to the registry.
+            setStudentFilePath(file);
+
+        } catch (Exception e) { // catches ANY exception
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Could not load data");
+            alert.setContentText("Could not load data from file:\n" + file.getPath());
+
+            alert.showAndWait();
+        }
+    }
+
+    /**
+     * Saves the current student data to the specified file.
+     *
+     * @param file
+     */
+    public void saveStudentDataToFile(File file) {
+        try {
+            JAXBContext context = JAXBContext
+                    .newInstance(StudentListWrapper.class);
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+            // Wrapping our student data.
+            StudentListWrapper wrapper = new StudentListWrapper();
+            wrapper.setStudents(studentData);
+
+            // Marshalling and saving XML to the file.
+            m.marshal(wrapper, file);
+
+            // Save the file path to the registry.
+            setStudentFilePath(file);
+        } catch (Exception e) { // catches ANY exception
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Could not save data");
+            alert.setContentText("Could not save data to file:\n" + file.getPath());
+
+            alert.showAndWait();
+        }
     }
 }
