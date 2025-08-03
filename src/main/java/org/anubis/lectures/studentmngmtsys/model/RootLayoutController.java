@@ -1,9 +1,14 @@
 package org.anubis.lectures.studentmngmtsys.model;
 
 import java.io.File;
+import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 
 /**
@@ -13,11 +18,41 @@ import javafx.stage.FileChooser;
  */
 public class RootLayoutController {
 
+    // inject your bottom-bar controls if needed:
+    @FXML private Label statusLabel;
+    @FXML private ProgressBar progressBar;
+
 
     private StudentStorage storage;
 
-    public void setStorage(StudentStorage storage) {
+    public void setStorage(StudentStorage storage, BorderPane rootLayout) {
         this.storage = storage;
+        viewDataBar.setRootLayout(rootLayout);   // pass the BorderPane in
+
+    }
+
+    // compose your helper:
+    private final ViewDataBar viewDataBar = new ViewDataBar();
+
+    /** Called when user selects “Display Students” */
+    @FXML
+    private void handleShowStudents() throws IOException {
+        viewDataBar.handleShowStudents();
+        statusLabel.setText("Showing students");
+    }
+
+    /** Called when user selects “Display Courses” */
+    @FXML
+    private void handleShowCourses() {
+        viewDataBar.handleShowCourses();
+        statusLabel.setText("Showing courses");
+    }
+
+    /** Called when user selects “Display Enrollments” */
+    @FXML
+    private void handleShowEnrollments() {
+        viewDataBar.handleShowEnrollmetns();
+        statusLabel.setText("Showing enrollments");
     }
 
     /**
