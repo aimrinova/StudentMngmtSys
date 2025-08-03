@@ -157,4 +157,13 @@ public class StudentController {
         // Add observable list data to the table
         studentTable.setItems(storage.getStudentData());
     }
+
+    /**
+     * Is called by the main application to give a reference back to itself.
+     *
+     * @param mainApp
+     */
+    public void setMainApp(MainApp mainApp) {
+        this.mainApp = mainApp;
+    }
 }

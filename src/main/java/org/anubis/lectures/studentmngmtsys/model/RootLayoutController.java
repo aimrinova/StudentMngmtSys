@@ -1,17 +1,10 @@
 package org.anubis.lectures.studentmngmtsys.model;
 
 import java.io.File;
-import java.util.prefs.Preferences;
-
-import jakarta.xml.bind.JAXBContext;
-import jakarta.xml.bind.Marshaller;
-import jakarta.xml.bind.Unmarshaller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
-import org.anubis.lectures.studentmngmtsys.MainApp;
-import org.anubis.lectures.studentmngmtsys.util.StudentListWrapper;
 
 /**
  * The controller for the root layout. The root layout provides the basic

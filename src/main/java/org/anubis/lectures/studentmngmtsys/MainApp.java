@@ -106,6 +106,9 @@ public class MainApp extends Application {
             // Give the controller access to the storage.
             StudentController studentCtrl = studentLoader.getController();
             studentCtrl.setStorage(storage);
+            // ← NEW: also give it a reference to this MainApp so showPersonEditDialog(...) works
+            studentCtrl.setMainApp(this);
+
         } catch (Exception ex) {
             ex.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR);
