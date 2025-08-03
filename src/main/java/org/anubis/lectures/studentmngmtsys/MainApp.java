@@ -11,7 +11,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.anubis.lectures.studentmngmtsys.model.RootLayoutController;
+import org.anubis.lectures.studentmngmtsys.controller.StudentController;
+import org.anubis.lectures.studentmngmtsys.controller.RootLayoutController;
+import org.anubis.lectures.studentmngmtsys.controller.StudentEditModal;
 import org.anubis.lectures.studentmngmtsys.model.StudentStorage;
 
 import java.io.IOException;

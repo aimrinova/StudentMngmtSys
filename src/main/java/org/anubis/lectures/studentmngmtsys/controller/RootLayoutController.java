@@ -1,4 +1,4 @@
-package org.anubis.lectures.studentmngmtsys.model;
+package org.anubis.lectures.studentmngmtsys.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
+import org.anubis.lectures.studentmngmtsys.model.StudentStorage;
+import org.anubis.lectures.studentmngmtsys.model.ViewDataBar;
 
 /**
  * The controller for the root layout. The root layout provides the basic
@@ -18,21 +20,35 @@ import javafx.stage.FileChooser;
  */
 public class RootLayoutController {
 
+    // the main BorderPane, so we can swap the center content
+    @FXML
+    private BorderPane rootLayout;
+
     // inject your bottom-bar controls if needed:
-    @FXML private Label statusLabel;
-    @FXML private ProgressBar progressBar;
-
-
-    private StudentStorage storage;
-
-    public void setStorage(StudentStorage storage, BorderPane rootLayout) {
-        this.storage = storage;
-        viewDataBar.setRootLayout(rootLayout);   // pass the BorderPane in
-
-    }
+    @FXML
+    private Label statusLabel;
+    @FXML
+    private ProgressBar progressBar;
 
     // compose your helper:
     private final ViewDataBar viewDataBar = new ViewDataBar();
+
+    // the shared storage instance
+    private StudentStorage storage;
+
+    /**
+     * Is called by the main application to give a reference back to itself
+     * and the root layout pane.
+     *
+     * @param storage the StudentStorage
+     * @param rootLayout the BorderPane root
+     */
+    public void setStorage(StudentStorage storage, BorderPane rootLayout) {
+        this.storage = storage;
+        // wire the root pane and storage into the helper
+        viewDataBar.setRootLayout(rootLayout);
+        viewDataBar.setStorage(storage);
+    }
 
     /** Called when user selects “Display Students” */
     @FXML
@@ -51,9 +67,11 @@ public class RootLayoutController {
     /** Called when user selects “Display Enrollments” */
     @FXML
     private void handleShowEnrollments() {
-        viewDataBar.handleShowEnrollmetns();
+        viewDataBar.handleShowEnrollments();
         statusLabel.setText("Showing enrollments");
     }
+
+    // --- my existing File menu handlers ---
 
     /**
      * Creates an empty address book.

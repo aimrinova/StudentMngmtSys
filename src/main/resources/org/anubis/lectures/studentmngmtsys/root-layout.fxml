@@ -4,18 +4,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.anubis.lectures.studentmngmtsys.model.RootLayoutController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.anubis.lectures.studentmngmtsys.controller.RootLayoutController">
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>
+            <Menu mnemonicParsing="false" text="Home">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Home/Login" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Close" />
+               </items>
+            </Menu>
                 <Menu mnemonicParsing="false" text="View Data">
                     <items>
-                  <MenuItem mnemonicParsing="false" onAction="#handleShowStudents" text="Display Students" />
-                  <MenuItem mnemonicParsing="false" onAction="#handleShowCourses" text="Display Courses" />
-                  <MenuItem mnemonicParsing="false" onAction="#handleShowEnrollments" text="Display Enrollments" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleShowStudents" text="Display All Students" />
+                  <MenuItem mnemonicParsing="false" text="Display Student Grades" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleShowCourses" text="Display All Courses" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleShowEnrollments" text="Enrolled Students each Course" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit Data">
@@ -29,11 +33,11 @@
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#handleOpen" text="Load Data" />
                   <MenuItem mnemonicParsing="false" onAction="#handleSaveAs" text="Save Data" />
-                        <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Close" />
               </items>
             </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
+                  <MenuItem mnemonicParsing="false" text="App Instructions" />
                         <MenuItem mnemonicParsing="false" onAction="#handleAbout" text="About" />
                     </items>
                 </Menu>

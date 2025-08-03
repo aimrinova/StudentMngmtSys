@@ -1,11 +1,13 @@
 // --- src/main/java/org/anubis/lectures/studentmngmtsys/StudentController.java ---
-package org.anubis.lectures.studentmngmtsys;
+package org.anubis.lectures.studentmngmtsys.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import org.anubis.lectures.studentmngmtsys.MainApp;
+import org.anubis.lectures.studentmngmtsys.Student;
 import org.anubis.lectures.studentmngmtsys.model.StudentStorage;
 
 public class StudentController {

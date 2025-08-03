@@ -17,4 +17,6 @@ module org.anubis.lectures.studentmngmtsys {
     exports org.anubis.lectures.studentmngmtsys;
     exports org.anubis.lectures.studentmngmtsys.model;
     opens org.anubis.lectures.studentmngmtsys.model to javafx.fxml;
+    exports org.anubis.lectures.studentmngmtsys.controller;
+    opens org.anubis.lectures.studentmngmtsys.controller to javafx.fxml;
 }

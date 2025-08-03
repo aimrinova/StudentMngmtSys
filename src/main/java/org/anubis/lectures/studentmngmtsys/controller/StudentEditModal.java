@@ -1,10 +1,11 @@
-package org.anubis.lectures.studentmngmtsys;
+package org.anubis.lectures.studentmngmtsys.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.anubis.lectures.studentmngmtsys.Student;
 import org.anubis.lectures.studentmngmtsys.util.DateUtil;
 
 public class StudentEditModal {

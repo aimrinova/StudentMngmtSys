@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="allStudentsTable" prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.anubis.lectures.studentmngmtsys.controller.AllStudentsController">
+    <children>
+        <TableView fx:id="studentsTable"
+                   prefHeight="600.0" prefWidth="700.0"
+                   AnchorPane.bottomAnchor="0.0"
+                   AnchorPane.leftAnchor="0.0"
+                   AnchorPane.rightAnchor="0.0"
+                   AnchorPane.topAnchor="0.0">
+            <columns>
+                <TableColumn fx:id="studentIdColumn"   prefWidth="88.0"  text="Student ID" />
+                <TableColumn fx:id="firstNameColumn"   prefWidth="103.0" text="Firstname" />
+                <TableColumn fx:id="lastNameColumn"    prefWidth="90.0"  text="Lastname" />
+                <TableColumn fx:id="studyFieldColumn"  prefWidth="157.0" text="Study Field" />
+                <TableColumn fx:id="creditsColumn"     prefWidth="71.0"  text="Credits" />
+                <TableColumn fx:id="avgGradeColumn"    prefWidth="90.0"  text="Avg Grade" />
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+        </TableView>
+    </children>
+</AnchorPane>
