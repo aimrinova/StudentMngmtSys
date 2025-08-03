@@ -22,12 +22,19 @@ public class HelloController {
     @FXML private Button btnDryRun;
     @FXML private Button btnScript1;
 
-    @FXML private void onHome() {
+    @FXML
+    private void onHome() {
+        // Unbind before setting text manually
+        statusLabel.textProperty().unbind();
         statusLabel.setText("Home clicked");
     }
-    @FXML private void onSettings() {
+
+    @FXML
+    private void onSettings() {
+        statusLabel.textProperty().unbind();
         statusLabel.setText("Settings clicked");
     }
+
 
     @FXML private void onDryRun() {
         executeAsync(List.of("python", "scripts/my_script.py", "--dryrun"));
@@ -63,57 +70,57 @@ public class HelloController {
         Task<Void> task = new Task<>() {
             @Override
             protected Void call() throws Exception {
-                Platform.runLater(() -> {
-                    spinner.setVisible(true);
-                    progressBar.setVisible(true);
-                    statusLabel.setText("Running...");
-                });
-
+                updateMessage("Running...");
                 ProcessBuilder pb = prepareBuilder(cmd);
-                var proc = pb.start();
+                Process proc = pb.start();
                 try (var reader = new BufferedReader(new InputStreamReader(proc.getInputStream()))) {
                     String line;
-                    int count=0;
+                    int count = 0;
                     while ((line = reader.readLine()) != null) {
-                        int progress = ++count;
+                        count++;
                         updateMessage(line);
-                        // Optionally update progressBar here
                     }
                 }
                 int code = proc.waitFor();
-                final int exitCode = code;
-                updateMessage("Finished with code " + exitCode);
+                updateMessage("Finished with code " + code);
                 return null;
             }
         };
 
-        /*
+        // Bindings control the UI—no manual setVisible
+        spinner.visibleProperty().bind(task.runningProperty());
+        progressBar.visibleProperty().bind(task.runningProperty());
+        statusLabel.textProperty().bind(task.messageProperty());
+
         task.setOnFailed(evt -> {
             Throwable error = task.getException();
-            Alert alert = new Alert(Alert.AlertType.ERROR, error.getMessage(), ButtonType.OK);
-            alert.setHeaderText("Operation Failed");
-            alert.show();
+            Platform.runLater(() -> {
+                statusLabel.textProperty().unbind();
+                statusLabel.setText("Error: " + error.getMessage());
+                new Alert(Alert.AlertType.ERROR, error.getMessage(), ButtonType.OK)
+                        .showAndWait();
+            });
         });
-        */
-
-
-
-        // Bind UI
-        spinner.visibleProperty().bind(task.runningProperty());
-        progressBar.progressProperty().bind(task.progressProperty());
-        statusLabel.textProperty().bind(task.messageProperty());
 
         new Thread(task).start();
     }
 
+
     private static ProcessBuilder prepareBuilder(List<String> cmd) throws Exception {
-        // locate base dir
-        File jar = new File(HelloController.class
-                .getProtectionDomain()
-                .getCodeSource()
-                .getLocation()
-                .toURI());
-        File base = jar.getParentFile();
+        File base;
+        try {
+            // Works in JAR
+            File jar = new File(HelloController.class
+                    .getProtectionDomain()
+                    .getCodeSource()
+                    .getLocation()
+                    .toURI());
+            base = jar.getParentFile();
+        } catch (Exception ex) {
+            // Fallback for IDE execution
+            base = new File(System.getProperty("user.dir"));
+        }
+
         ProcessBuilder pb = new ProcessBuilder(cmd);
         pb.directory(base);
         pb.redirectErrorStream(true);

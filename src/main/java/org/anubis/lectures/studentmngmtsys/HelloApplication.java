@@ -66,7 +66,10 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
-        // JavaFX launch must be last
+        HelloApplication app = new HelloApplication();
+        if (app.handleCliMode(Arrays.asList(args))) {
+            System.exit(0); // Exit if CLI mode is handled
+        }
         launch(args);
     }
 }
