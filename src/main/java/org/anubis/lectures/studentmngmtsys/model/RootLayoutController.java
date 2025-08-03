@@ -1,11 +1,17 @@
-package org.anubis.lectures.studentmngmtsys;
+package org.anubis.lectures.studentmngmtsys.model;
 
 import java.io.File;
+import java.util.prefs.Preferences;
 
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
+import org.anubis.lectures.studentmngmtsys.MainApp;
+import org.anubis.lectures.studentmngmtsys.util.StudentListWrapper;
 
 /**
  * The controller for the root layout. The root layout provides the basic
@@ -14,16 +20,11 @@ import javafx.stage.FileChooser;
  */
 public class RootLayoutController {
 
-    // Reference to the main application
-    private MainApp mainApp;
 
-    /**
-     * Is called by the main application to give a reference back to itself.
-     *
-     * @param mainApp
-     */
-    public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
+    private StudentStorage storage;
+
+    public void setStorage(StudentStorage storage) {
+        this.storage = storage;
     }
 
     /**
@@ -31,8 +32,8 @@ public class RootLayoutController {
      */
     @FXML
     private void handleNew() {
-        mainApp.getStudentData().clear();
-        mainApp.setStudentFilePath(null);
+        storage.getStudentData().clear();
+        storage.setStudentFilePath(null);
     }
 
     /**
@@ -48,10 +49,10 @@ public class RootLayoutController {
         fileChooser.getExtensionFilters().add(extFilter);
 
         // Show open file dialog
-        File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
+        File file = fileChooser.showOpenDialog(storage.getPrimaryStage());
 
         if (file != null) {
-            mainApp.loadStudentDataFromFile(file);
+            storage.loadStudentDataFromFile(file);
         }
     }
 
@@ -61,9 +62,9 @@ public class RootLayoutController {
      */
     @FXML
     private void handleSave() {
-        File studentFile = mainApp.getStudentFilePath();
+        File studentFile = storage.getStudentFilePath();
         if (studentFile != null) {
-            mainApp.saveStudentDataToFile(studentFile);
+            storage.saveStudentDataToFile(studentFile);
         } else {
             handleSaveAs();
         }
@@ -82,14 +83,14 @@ public class RootLayoutController {
         fileChooser.getExtensionFilters().add(extFilter);
 
         // Show save file dialog
-        File file = fileChooser.showSaveDialog(mainApp.getPrimaryStage());
+        File file = fileChooser.showSaveDialog(storage.getPrimaryStage());
 
         if (file != null) {
             // Make sure it has the correct extension
             if (!file.getPath().endsWith(".xml")) {
                 file = new File(file.getPath() + ".xml");
             }
-            mainApp.saveStudentDataToFile(file);
+            storage.saveStudentDataToFile(file);
         }
     }
 

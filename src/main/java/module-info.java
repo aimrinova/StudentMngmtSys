@@ -15,4 +15,6 @@ module org.anubis.lectures.studentmngmtsys {
     opens org.anubis.lectures.studentmngmtsys.util to jakarta.xml.bind;
     opens org.anubis.lectures.studentmngmtsys to javafx.fxml;
     exports org.anubis.lectures.studentmngmtsys;
+    exports org.anubis.lectures.studentmngmtsys.model;
+    opens org.anubis.lectures.studentmngmtsys.model to javafx.fxml;
 }

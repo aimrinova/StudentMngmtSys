@@ -6,6 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import org.anubis.lectures.studentmngmtsys.model.StudentStorage;
 
 public class StudentController {
     @FXML
@@ -32,6 +33,7 @@ public class StudentController {
 
     // Reference to the main application.
     private MainApp mainApp;
+    private StudentStorage storage;
 
     /**
      * The constructor.
@@ -116,7 +118,7 @@ public class StudentController {
         Student tempStudent = new Student();
         boolean okClicked = mainApp.showPersonEditDialog(tempStudent);
         if (okClicked) {
-            mainApp.getStudentData().add(tempStudent);
+            storage.getStudentData().add(tempStudent);
         }
     }
 
@@ -136,7 +138,7 @@ public class StudentController {
         } else {
             // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.initOwner(mainApp.getPrimaryStage());
+            alert.initOwner(storage.getPrimaryStage());
             alert.setTitle("No Selection");
             alert.setHeaderText("No Student Selected");
             alert.setContentText("Please select a student in the table.");
@@ -148,12 +150,11 @@ public class StudentController {
     /**
      * Is called by the main application to give a reference back to itself.
      *
-     * @param mainApp
+     * @param storage
      */
-    public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
-
+    public void setStorage(StudentStorage storage) {
+        this.storage = storage;
         // Add observable list data to the table
-        studentTable.setItems(mainApp.getStudentData());
+        studentTable.setItems(storage.getStudentData());
     }
 }
