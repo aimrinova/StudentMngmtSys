@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+        <MenuBar BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="false" text="View Data">
+                    <items>
+                  <MenuItem mnemonicParsing="false" text="Display Students" />
+                  <MenuItem mnemonicParsing="false" text="Display Courses" />
+                  <MenuItem mnemonicParsing="false" text="Display Single Coure" />
+                        <MenuItem mnemonicParsing="false" text="Close" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit Data">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Student Info" />
+                  <MenuItem mnemonicParsing="false" text="Courses" />
+                  <MenuItem mnemonicParsing="false" text="Student Enrollment" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+
+    <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+   </center>
+
+   <right>
+      <ScrollBar orientation="VERTICAL" prefHeight="210.0" prefWidth="14.0" BorderPane.alignment="CENTER" />
+   </right>
+   <bottom>
+       <HBox alignment="CENTER_LEFT" spacing="10">
+           <padding>
+               <Insets bottom="10" left="10" right="10" top="10" />
+           </padding>
+           <Label fx:id="statusLabel" text="Ready" />
+           <ProgressBar fx:id="progressBar" prefWidth="200" visible="false" />
+       </HBox>
+   </bottom>
+
+</BorderPane>
