@@ -16,6 +16,7 @@ public class Student {
     private final IntegerProperty postalCode;
     private final StringProperty city;
     private final ObjectProperty<LocalDate> birthday;
+    private final StringProperty studentId;
 
     /**
      * Default constructor.
@@ -39,6 +40,7 @@ public class Student {
         this.postalCode = new SimpleIntegerProperty(1234);
         this.city = new SimpleStringProperty("some city");
         this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
+        this.studentId = new SimpleStringProperty("some id");
     }
 
     public String getFirstName() {
@@ -111,5 +113,17 @@ public class Student {
 
     public ObjectProperty<LocalDate> birthdayProperty() {
         return birthday;
+    }
+
+    public String getStudentId() {
+        return studentId.get();
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId.set(studentId);
+    }
+
+    public StringProperty studentIdProperty() {
+        return studentId;
     }
 }
