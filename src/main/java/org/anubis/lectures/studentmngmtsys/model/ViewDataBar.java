@@ -108,13 +108,14 @@ public class ViewDataBar {
                 throw new IllegalStateException("Cannot find FXML 'student-overview.fxml'");
             }
             AnchorPane studentOverview = (AnchorPane) loader.load();
-            rootLayout.setCenter(studentOverview);
-
             // Give the controller access to the storage.
             StudentController studentCtrl = loader.getController();
             studentCtrl.setStorage(storage);
             // ← NEW: also give it a reference to this MainApp so showPersonEditDialog(...) works
             studentCtrl.setMainApp(mainApp);
+            // ← inject the helper instance so viewDataBar is never null
+            studentCtrl.setViewDataBar(this);
+            rootLayout.setCenter(studentOverview);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -164,6 +165,10 @@ public class ViewDataBar {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public void setMainApp(MainApp mainApp) {
+        this.mainApp = mainApp;
     }
 
 }

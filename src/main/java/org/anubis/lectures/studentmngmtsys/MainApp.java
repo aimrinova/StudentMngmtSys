@@ -57,6 +57,9 @@ public class MainApp extends Application {
 
             // Give the controller access to the storage.
             RootLayoutController rootCtrl = rootLoader.getController();
+            // first give it the MainApp reference
+            rootCtrl.setMainApp(this);
+            // then give it the storage + layout
             rootCtrl.setStorage(storage, rootLayout);
 
             // Show the scene containing the root layout.

@@ -162,6 +162,11 @@ public class StudentController {
         studentTable.setItems(storage.getStudentData());
     }
 
+    public void setViewDataBar(ViewDataBar viewDataBar) {
+        this.viewDataBar = viewDataBar;
+    }
+
+
     /**
      * Is called by the main application to give a reference back to itself.
      *

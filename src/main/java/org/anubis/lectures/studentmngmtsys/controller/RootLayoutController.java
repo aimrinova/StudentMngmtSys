@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
+import org.anubis.lectures.studentmngmtsys.MainApp;
 import org.anubis.lectures.studentmngmtsys.model.StudentStorage;
 import org.anubis.lectures.studentmngmtsys.model.ViewDataBar;
 
@@ -23,7 +24,9 @@ public class RootLayoutController {
     // the main BorderPane, so we can swap the center content
     @FXML
     private BorderPane rootLayout;
-
+    // the shared storage instance
+    private StudentStorage storage;
+    private MainApp mainApp;
     // inject your bottom-bar controls if needed:
     @FXML
     private Label statusLabel;
@@ -33,8 +36,10 @@ public class RootLayoutController {
     // compose your helper:
     private final ViewDataBar viewDataBar = new ViewDataBar();
 
-    // the shared storage instance
-    private StudentStorage storage;
+
+    public void setMainApp(MainApp mainApp) {
+        this.mainApp = mainApp;
+    }
 
     /**
      * Is called by the main application to give a reference back to itself
@@ -48,6 +53,8 @@ public class RootLayoutController {
         // wire the root pane and storage into the helper
         viewDataBar.setRootLayout(rootLayout);
         viewDataBar.setStorage(storage);
+        viewDataBar.setMainApp(mainApp);
+
     }
 
     /** Called when user selects “View Home” */
