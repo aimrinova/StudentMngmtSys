@@ -50,6 +50,13 @@ public class RootLayoutController {
         viewDataBar.setStorage(storage);
     }
 
+    /** Called when user selects “View Home” */
+    @FXML
+    private void handleShowHome(){
+        viewDataBar.showHomeScreen();
+        statusLabel.setText("Home");
+    }
+
     /** Called when user selects “Display Students” */
     @FXML
     private void handleShowStudents() throws IOException {
@@ -71,8 +78,14 @@ public class RootLayoutController {
         statusLabel.setText("Showing enrollments");
     }
 
-    // --- my existing File menu handlers ---
+    // --- my existing Edit Data menu handlers ---
 
+    /** Called when user selects “Display Enrollments” */
+    @FXML
+    private void handleEditStudents() {
+        viewDataBar.showEditStudent();
+        statusLabel.setText("Showing Students Entries");
+    }
     /**
      * Creates an empty address book.
      */

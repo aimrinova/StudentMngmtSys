@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import org.anubis.lectures.studentmngmtsys.MainApp;
+import org.anubis.lectures.studentmngmtsys.model.ViewDataBar;
 import org.anubis.lectures.studentmngmtsys.Student;
 import org.anubis.lectures.studentmngmtsys.model.StudentStorage;
 
@@ -35,6 +36,7 @@ public class StudentController {
 
     // Reference to the main application.
     private MainApp mainApp;
+    private ViewDataBar viewDataBar;
     private StudentStorage storage;
 
     /**
@@ -118,7 +120,7 @@ public class StudentController {
     @FXML
     private void handleNewStudent() {
         Student tempStudent = new Student();
-        boolean okClicked = mainApp.showPersonEditDialog(tempStudent);
+        boolean okClicked = viewDataBar.showPersonEditDialog(tempStudent);
         if (okClicked) {
             storage.getStudentData().add(tempStudent);
         }
@@ -132,7 +134,7 @@ public class StudentController {
     private void handleEditStudent() {
         Student selectedStudent = studentTable.getSelectionModel().getSelectedItem();
         if (selectedStudent != null) {
-            boolean okClicked = mainApp.showPersonEditDialog(selectedStudent);
+            boolean okClicked = viewDataBar.showPersonEditDialog(selectedStudent);
             if (okClicked) {
                 showStudentDetails(selectedStudent);
             }
@@ -164,7 +166,7 @@ public class StudentController {
      * Is called by the main application to give a reference back to itself.
      *
      * @param mainApp
-     */
+    */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }

@@ -10,7 +10,7 @@
             <menus>
             <Menu mnemonicParsing="false" text="Home">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Home/Login" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleShowHome" text="Home/Login" />
                         <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Close" />
                </items>
             </Menu>
@@ -24,7 +24,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit Data">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Student Info" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleEditStudents" text="Student Info" />
                   <MenuItem mnemonicParsing="false" text="Courses" />
                   <MenuItem mnemonicParsing="false" text="Student Enrollment" />
                     </items>

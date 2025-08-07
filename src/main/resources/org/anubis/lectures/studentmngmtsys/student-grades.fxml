@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.anubis.lectures.studentmngmtsys.StudentGrades"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.anubis.lectures.studentmngmtsys.StudentGrades">
+   <children>
+      <BorderPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <TableView editable="true" prefHeight="400.0" prefWidth="600.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
+              <columns>
+                  <TableColumn prefWidth="75.0" text="Course ID" />
+                <TableColumn prefWidth="75.0" text="Course" />
+                <TableColumn prefWidth="75.0" text="Grade" />
+                  <TableColumn prefWidth="75.0" text="Attempts" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </center>
+         <top>
+            <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+              <items>
+                  <TextField prefHeight="25.0" prefWidth="321.0" />
+                <Button mnemonicParsing="false" text="Search" />
+              </items>
+            </ToolBar>
+         </top>
+      </BorderPane>
+   </children>
 </AnchorPane>
