@@ -9,10 +9,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.anubis.lectures.studentmngmtsys.MainApp;
-import org.anubis.lectures.studentmngmtsys.Student;
-import org.anubis.lectures.studentmngmtsys.controller.AllStudentsController;
-import org.anubis.lectures.studentmngmtsys.controller.StudentController;
-import org.anubis.lectures.studentmngmtsys.controller.StudentEditModal;
+import org.anubis.lectures.studentmngmtsys.controller.*;
 
 import java.io.IOException;
 
@@ -23,6 +20,7 @@ public class ViewDataBar {
     private MainApp mainApp;
     // a reference to your StudentStorage (so you can pass it on)
     private StudentStorage storage;
+    private CourseStorage course;
 
     public ViewDataBar() {
     }
@@ -61,6 +59,10 @@ public class ViewDataBar {
                     getClass().getResource("/org/anubis/lectures/studentmngmtsys/all-courses-table.fxml")
             );
             AnchorPane pane = loader.load();
+
+            // grab the courses controller and give it the shared storage
+            AllCoursesController ctrl = loader.getController();
+            ctrl.setStorage(this.course);
             rootLayout.setCenter(pane);
         } catch (Exception e) {
             e.printStackTrace();
@@ -167,8 +169,49 @@ public class ViewDataBar {
         }
     }
 
+    /**
+     * Opens a dialog to edit details for the specified course. If the user
+     * clicks OK, the changes are saved into the provided course object and true
+     * is returned.
+     *
+     * @param course the course object to be edited
+     * @return true if the user clicked OK, false otherwise.
+     */
+    public boolean showCourseEditDialog(Course course) {
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/org/anubis/lectures/studentmngmtsys/course-edit-modal.fxml")
+            );
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Edit Person");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(mainApp.getPrimaryStage());
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the Course into the controller.
+            CourseEditModal controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setCourse(course);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
+
 
 }

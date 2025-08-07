@@ -7,7 +7,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-import org.anubis.lectures.studentmngmtsys.Student;
 import org.anubis.lectures.studentmngmtsys.util.StudentListWrapper;
 
 import java.io.File;
@@ -133,7 +132,7 @@ public class StudentStorage {
         alert.showAndWait();
     }
 
-    public ObservableList<Student> tudentData() {
+    public ObservableList<Student> studentData() {
         return studentData;
     }
 

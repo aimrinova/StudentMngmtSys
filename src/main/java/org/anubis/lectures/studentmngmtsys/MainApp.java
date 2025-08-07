@@ -10,6 +10,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.anubis.lectures.studentmngmtsys.controller.RootLayoutController;
+import org.anubis.lectures.studentmngmtsys.model.Student;
 import org.anubis.lectures.studentmngmtsys.model.StudentStorage;
 
 

@@ -1,4 +1,4 @@
-package org.anubis.lectures.studentmngmtsys;
+package org.anubis.lectures.studentmngmtsys.model;
 
 import java.time.LocalDate;
 
@@ -19,7 +19,6 @@ public class Student {
     private final IntegerProperty postalCode;
     private final StringProperty city;
     private final ObjectProperty<LocalDate> birthday;
-
 
     /**
      * Default constructor.
@@ -135,4 +134,6 @@ public class Student {
         return birthday;
     }
 
+    public static int getIdCounter() { return idCounter;}
+    public static void setIdCounter(int idCounter) { Student.idCounter = idCounter; }
 }

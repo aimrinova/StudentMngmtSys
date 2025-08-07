@@ -6,12 +6,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.GridPane;
 import org.anubis.lectures.studentmngmtsys.MainApp;
 import org.anubis.lectures.studentmngmtsys.model.ViewDataBar;
-import org.anubis.lectures.studentmngmtsys.Student;
+import org.anubis.lectures.studentmngmtsys.model.Student;
 import org.anubis.lectures.studentmngmtsys.model.StudentStorage;
 
 public class StudentController {
+    public GridPane studentInfo;
     @FXML
     private TableView<Student> studentTable;
     @FXML

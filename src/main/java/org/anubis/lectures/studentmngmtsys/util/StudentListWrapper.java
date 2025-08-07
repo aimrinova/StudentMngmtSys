@@ -1,6 +1,6 @@
 package org.anubis.lectures.studentmngmtsys.util;
 
-import org.anubis.lectures.studentmngmtsys.Student;
+import org.anubis.lectures.studentmngmtsys.model.Student;
 
 import java.util.List;
 
