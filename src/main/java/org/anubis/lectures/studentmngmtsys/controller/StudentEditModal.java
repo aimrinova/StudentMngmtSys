@@ -14,6 +14,10 @@ public class StudentEditModal {
     private TextField firstNameField;
     @FXML
     private TextField lastNameField;
+    public TextField studentIdField;
+    public TextField studyFieldField;
+    public TextField creditsField;
+    public TextField avgGradeField;
     @FXML
     private TextField streetField;
     @FXML
@@ -22,12 +26,9 @@ public class StudentEditModal {
     private TextField cityField;
     @FXML
     private TextField birthdayField;
-    @FXML
-    private TextField studentIdField;
-
 
     private Stage dialogStage;
-    private Student person;
+    private Student student;
     private boolean okClicked = false;
 
     /**
@@ -53,10 +54,14 @@ public class StudentEditModal {
      * @param student
      */
     public void setStudent(Student student) {
-        this.person = student;
+        this.student = student;
 
         firstNameField.setText(student.getFirstName());
         lastNameField.setText(student.getLastName());
+        studentIdField.setText(student.getStudentId());
+        studyFieldField.setText(student.getStudyField());
+        creditsField.setText(Integer.toString(student.getCredits()));
+        avgGradeField.setText(Double.toString(student.getAvgGrade()));
         streetField.setText(student.getStreet());
         postalCodeField.setText(Integer.toString(student.getPostalCode()));
         cityField.setText(student.getCity());
@@ -80,13 +85,16 @@ public class StudentEditModal {
     @FXML
     private void handleOk() {
         if (isInputValid()) {
-            person.setFirstName(firstNameField.getText());
-            person.setLastName(lastNameField.getText());
-            person.setStreet(streetField.getText());
-            person.setPostalCode(Integer.parseInt(postalCodeField.getText()));
-            person.setCity(cityField.getText());
-            person.setBirthday(DateUtil.parse(birthdayField.getText()));
-
+            student.setFirstName(firstNameField.getText());
+            student.setLastName(lastNameField.getText());
+            student.setStudentId(studentIdField.getText());
+            student.setStudyField(studyFieldField.getText());
+            student.setCredits(Integer.parseInt(creditsField.getText()));
+            student.setAvgGrade(Double.parseDouble(avgGradeField.getText()));
+            student.setStreet(streetField.getText());
+            student.setPostalCode(Integer.parseInt(postalCodeField.getText()));
+            student.setCity(cityField.getText());
+            student.setBirthday(DateUtil.parse(birthdayField.getText()));
             okClicked = true;
             dialogStage.close();
         }

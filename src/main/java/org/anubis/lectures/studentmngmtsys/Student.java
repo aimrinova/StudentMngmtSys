@@ -4,10 +4,11 @@ import java.time.LocalDate;
 
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javafx.beans.property.*;
-import javafx.beans.value.ObservableValue;
 import org.anubis.lectures.studentmngmtsys.util.LocalDateAdapter;
 
 public class Student {
+    private static int idCounter = 0;
+
     private final StringProperty firstName;
     private final StringProperty lastName;
     private final StringProperty studentId;
@@ -36,16 +37,19 @@ public class Student {
     public Student(String firstName, String lastName) {
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
-
+        this.studyField = new SimpleStringProperty("CS");
+        // build ID: first two letters of studyField + zero-padded counter
+        this.studentId  = new SimpleStringProperty(
+                studyField.get().substring(0,2).toUpperCase()
+                        + String.format("%05d", ++idCounter)
+        );
+        this.credits = new SimpleIntegerProperty(0);
+        this.avgGrade = new SimpleDoubleProperty(0.0);
         // Some initial dummy data, just for convenient testing.
         this.street = new SimpleStringProperty("some street");
         this.postalCode = new SimpleIntegerProperty(1234);
         this.city = new SimpleStringProperty("some city");
         this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
-        this.studentId = new SimpleStringProperty("some id");
-        credits = null;
-        avgGrade = null;
-        studyField = null;
     }
 
     public String getFirstName() {

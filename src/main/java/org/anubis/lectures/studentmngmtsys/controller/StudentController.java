@@ -24,6 +24,13 @@ public class StudentController {
     @FXML
     private Label lastNameLabel;
     @FXML
+    private Label studentIdLabel;
+    @FXML
+    private Label studyFieldLabel;
+    public Label creditsLabel;
+    @FXML
+    private Label avgGradeLabel;
+    @FXML
     private Label streetLabel;
     @FXML
     private Label postalCodeLabel;
@@ -31,8 +38,6 @@ public class StudentController {
     private Label cityLabel;
     @FXML
     private Label birthdayLabel;
-    @FXML
-    private Label studentIdLabel;
 
     // Reference to the main application.
     private MainApp mainApp;
@@ -76,6 +81,10 @@ public class StudentController {
             // Fill the labels with info from the student object.
             firstNameLabel.setText(student.getFirstName());
             lastNameLabel.setText(student.getLastName());
+            studentIdLabel.setText(student.getStudentId());
+            studyFieldLabel.setText(student.getStudyField());
+            creditsLabel.setText(Integer.toString(student.getCredits()));
+            avgGradeLabel.setText(Double.toString(student.getAvgGrade()));
             streetLabel.setText(student.getStreet());
             postalCodeLabel.setText(Integer.toString(student.getPostalCode()));
             cityLabel.setText(student.getCity());
@@ -86,6 +95,10 @@ public class StudentController {
             // Student is null, remove all the text.
             firstNameLabel.setText("");
             lastNameLabel.setText("");
+            studentIdLabel.setText("");
+            studyFieldLabel.setText("");
+            creditsLabel.setText("");
+            avgGradeLabel.setText("");
             streetLabel.setText("");
             postalCodeLabel.setText("");
             cityLabel.setText("");
@@ -108,7 +121,6 @@ public class StudentController {
             alert.setTitle("No Selection");
             alert.setHeaderText("No Student Selected");
             alert.setContentText("Please select a student in the table.");
-
             alert.showAndWait();
         }
     }
