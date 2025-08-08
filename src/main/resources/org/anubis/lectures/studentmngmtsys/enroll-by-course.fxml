@@ -16,6 +16,7 @@
             <Label text="Select Course:"/>
             <ChoiceBox fx:id="courseChoice"/>
             <Button text="Enroll…" onAction="#handleEnrollStudent"/>
+            <Button text="Set Grade …"   onAction="#handleSetGrade"/>
         </HBox>
     </top>
     <center>

@@ -1,10 +1,8 @@
 package org.anubis.lectures.studentmngmtsys.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ChoiceDialog;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.util.StringConverter;
 import org.anubis.lectures.studentmngmtsys.model.*;
 
@@ -77,5 +75,31 @@ public class EnrollByCourseController {
 
         dialog.showAndWait()
                 .ifPresent(s -> studentStorage.enroll(s, course));
+    }
+
+    @FXML private void handleSetGrade() {
+        Enrollment selected = table.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            // show warning: “Select a student first”
+            return;
+        }
+        // reuse a simple TextInputDialog to grab the new grade
+        TextInputDialog dlg = new TextInputDialog(
+                Double.toString(selected.getGrade())
+        );
+        dlg.setTitle("Set Grade");
+        dlg.setHeaderText("Set grade for " + selected.getStudent().getFirstName());
+        dlg.setContentText("Grade:");
+
+        dlg.showAndWait().ifPresent(str -> {
+            try {
+                double g = Double.parseDouble(str);
+                selected.setGrade(g);
+                // optionally update storage/persistence
+                table.refresh();
+            } catch (NumberFormatException ex) {
+                // show error “Invalid number”
+            }
+        });
     }
 }
