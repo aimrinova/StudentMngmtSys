@@ -241,10 +241,33 @@ public class ViewDataBar {
         }
     }
 
+    public void showEnrollByCourse() throws IOException {
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/org/anubis/lectures/studentmngmtsys/enroll-by-course.fxml")
+        );
+        BorderPane pane = loader.load();
+
+        EnrollByCourseController ctrl = loader.getController();
+        // pass both storages
+        ctrl.setStorage(storage, courseStorage);
+
+        rootLayout.setCenter(pane);
+    }
+
+    public void showEnrollByStudent() throws IOException {
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/org/anubis/lectures/studentmngmtsys/enroll-by-student.fxml")
+        );
+        BorderPane pane = loader.load();
+
+        EnrollByStudentController ctrl = loader.getController();
+        ctrl.setStorage(storage);
+
+        rootLayout.setCenter(pane);
+    }
+
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
-
-
 }

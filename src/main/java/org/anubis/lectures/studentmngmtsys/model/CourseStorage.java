@@ -27,8 +27,8 @@ public class CourseStorage {
     public ObservableList<Course> getCourseData() {
         return courseData;
     }
-
     public Stage getPrimaryStage() {
         return primaryStage;
     }
+
 }

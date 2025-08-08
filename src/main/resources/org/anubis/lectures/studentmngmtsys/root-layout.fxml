@@ -17,16 +17,16 @@
                 <Menu mnemonicParsing="false" text="View Data">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#handleShowStudents" text="Display All Students" />
-                        <MenuItem mnemonicParsing="false" text="Display Student Grades" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleEnrollByStudent" text="Display Student Grades" />
                         <MenuItem mnemonicParsing="false" onAction="#handleShowCourses" text="Display All Courses" />
-                        <MenuItem mnemonicParsing="false" onAction="#handleShowEnrollments" text="Enrolled Students each Course" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleEnrollByCourse" text="Enrolled Students each Course" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit Data">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#handleEditStudents" text="Student Info" />
                         <MenuItem mnemonicParsing="false" onAction="#handleEditCourse" text="Courses Info" />
-                        <MenuItem mnemonicParsing="false" text="Student Enrollment" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleEnrollByCourse" text="Student Enrollment" />
                     </items>
                 </Menu>
             <Menu mnemonicParsing="false" text="File">

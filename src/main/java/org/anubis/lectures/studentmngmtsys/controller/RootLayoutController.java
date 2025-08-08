@@ -103,6 +103,17 @@ public class RootLayoutController {
         statusLabel.setText("Showing Course Entries");
     }
 
+    @FXML private void handleEnrollByCourse() throws IOException {
+        viewDataBar.showEnrollByCourse();
+        statusLabel.setText("Enroll by course");
+    }
+
+    @FXML private void handleEnrollByStudent() throws IOException {
+        viewDataBar.showEnrollByStudent();
+        statusLabel.setText("Enroll by student");
+    }
+
+
 
 
     /**

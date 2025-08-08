@@ -15,6 +15,8 @@ import java.util.prefs.Preferences;
 public class StudentStorage {
 
     private final ObservableList<Student> studentData = FXCollections.observableArrayList();
+    private final ObservableList<Enrollment> enrollments = FXCollections.observableArrayList();
+
     private final Stage primaryStage;
 
     public StudentStorage(Stage primaryStage) {
@@ -39,6 +41,19 @@ public class StudentStorage {
     public ObservableList<Student> getStudentData() {
         return studentData;
     }
+
+    /** Enroll a student in a course. */
+    public void enroll(Student s, Course c) {
+        enrollments.add(new Enrollment(s, c));
+    }
+    /** Un-enroll. */
+    public void unenroll(Enrollment e) {
+        enrollments.remove(e);
+    }
+    public ObservableList<Enrollment> getEnrollments() {
+        return enrollments;
+    }
+
 
     /**
      * Returns the Student file preference, i.e. the file that was last opened.

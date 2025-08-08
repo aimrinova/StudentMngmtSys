@@ -41,7 +41,6 @@ public class MainApp extends Application {
         CourseStorage courseStorage = new CourseStorage(primaryStage);
 
         initRootLayout(storage, courseStorage);
-        //showStudent(storage);
     }
 
     /**

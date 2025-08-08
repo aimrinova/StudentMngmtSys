@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.anubis.lectures.studentmngmtsys.controller.EnrollByStudentController">
+    <top>
+        <HBox spacing="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <Label text="Select Student:"/>
+            <ChoiceBox fx:id="studentChoice"/>
+        </HBox>
+    </top>
+    <center>
+        <TableView fx:id="table">
+            <columns>
+                <TableColumn text="Course">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="course"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Grade">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="grade"/>
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+    </center>
+</BorderPane>
