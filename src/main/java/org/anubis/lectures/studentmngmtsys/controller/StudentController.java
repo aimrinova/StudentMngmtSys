@@ -134,7 +134,7 @@ public class StudentController {
     @FXML
     private void handleNewStudent() {
         Student tempStudent = new Student();
-        boolean okClicked = viewDataBar.showPersonEditDialog(tempStudent);
+        boolean okClicked = viewDataBar.showStudentEditDialog(tempStudent);
         if (okClicked) {
             storage.getStudentData().add(tempStudent);
         }
@@ -148,7 +148,7 @@ public class StudentController {
     private void handleEditStudent() {
         Student selectedStudent = studentTable.getSelectionModel().getSelectedItem();
         if (selectedStudent != null) {
-            boolean okClicked = viewDataBar.showPersonEditDialog(selectedStudent);
+            boolean okClicked = viewDataBar.showStudentEditDialog(selectedStudent);
             if (okClicked) {
                 showStudentDetails(selectedStudent);
             }

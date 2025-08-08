@@ -38,6 +38,20 @@ public class Course {
         this.courseVolume = new SimpleIntegerProperty(120);
     }
 
+    public String getCourseId() { return courseId.get(); }
+    public void setCourseID(String courseId) { this.courseId.set(courseId); }
+    public StringProperty courseIdProperty() {
+        return courseId;
+    }
+
+    public String getCourseTitle() {
+        return courseTitle.get();
+    }
+    public void setCourseTitle(String courseTitle) { this.courseTitle.set(courseTitle); }
+    public StringProperty courseTitleProperty() {
+        return courseTitle;
+    }
+
     public int getCourseVolume() {
         return courseVolume.get();
     }
@@ -62,33 +76,5 @@ public class Course {
         return courseDescription.get();
     }
     public void setCourseDescription(String courseDescription) { this.courseDescription.set(courseDescription); }
-    public StringProperty courseDescriptionProperty() {
-        return courseDescription;
-    }
-
-    public String getCourseTitle() {
-        return courseTitle.get();
-    }
-    public void setCourseTitle(String courseTitle) { this.courseId.set(courseTitle); }
-    public StringProperty courseTitleProperty() {
-        return courseTitle;
-    }
-
-    public String getCourseId() {
-        return courseId.get();
-    }
-    public void setCourseID(String courseId) { this.courseId.set(courseId); }
-    public StringProperty courseIdProperty() {
-        return courseId;
-    }
-
-    public static int getIdCounter() {
-        return idCounter;
-    }
-    public static void setIdCounter(int idCounter) {
-        Course.idCounter = idCounter;
-    }
-
-
-
+    public StringProperty courseDescriptionProperty() { return courseDescription; }
 }

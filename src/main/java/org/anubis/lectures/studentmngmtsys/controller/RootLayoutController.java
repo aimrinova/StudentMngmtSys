@@ -11,6 +11,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import org.anubis.lectures.studentmngmtsys.MainApp;
+import org.anubis.lectures.studentmngmtsys.model.CourseStorage;
 import org.anubis.lectures.studentmngmtsys.model.StudentStorage;
 import org.anubis.lectures.studentmngmtsys.model.ViewDataBar;
 
@@ -48,11 +49,12 @@ public class RootLayoutController {
      * @param storage the StudentStorage
      * @param rootLayout the BorderPane root
      */
-    public void setStorage(StudentStorage storage, BorderPane rootLayout) {
+    public void setStorage(StudentStorage storage, CourseStorage courseStorage, BorderPane rootLayout) {
         this.storage = storage;
         // wire the root pane and storage into the helper
         viewDataBar.setRootLayout(rootLayout);
         viewDataBar.setStorage(storage);
+        viewDataBar.setCourseStorage(courseStorage);
         viewDataBar.setMainApp(mainApp);
 
     }
@@ -93,6 +95,16 @@ public class RootLayoutController {
         viewDataBar.showEditStudent();
         statusLabel.setText("Showing Students Entries");
     }
+
+    /** Called when user selects “Display Enrollments” */
+    @FXML
+    private void handleEditCourse() {
+        viewDataBar.showEditCourse();
+        statusLabel.setText("Showing Course Entries");
+    }
+
+
+
     /**
      * Creates an empty address book.
      */

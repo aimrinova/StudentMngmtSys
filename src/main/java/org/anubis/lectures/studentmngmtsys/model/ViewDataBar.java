@@ -20,7 +20,7 @@ public class ViewDataBar {
     private MainApp mainApp;
     // a reference to your StudentStorage (so you can pass it on)
     private StudentStorage storage;
-    private CourseStorage course;
+    private CourseStorage courseStorage;
 
     public ViewDataBar() {
     }
@@ -29,11 +29,12 @@ public class ViewDataBar {
     public void setRootLayout(BorderPane rootLayout) {
         this.rootLayout = rootLayout;
     }
-
-    /** called by RootLayoutController to inject the storage */
+    /** called by RootLayoutController to inject the student storage */
     public void setStorage(StudentStorage storage) {
         this.storage = storage;
     }
+    /** called by RootLayoutController to inject the course storage */
+    public void setCourseStorage(CourseStorage courseStorage) { this.courseStorage = courseStorage; }
 
     public void handleShowStudents() {
         try {
@@ -45,7 +46,6 @@ public class ViewDataBar {
             // grab the students controller and give it the shared storage
             AllStudentsController ctrl = loader.getController();
             ctrl.setStorage(this.storage);
-
             rootLayout.setCenter(pane);
 
         } catch (Exception e) {
@@ -62,7 +62,7 @@ public class ViewDataBar {
 
             // grab the courses controller and give it the shared storage
             AllCoursesController ctrl = loader.getController();
-            ctrl.setStorage(this.course);
+            ctrl.setCourseStorage(this.courseStorage);
             rootLayout.setCenter(pane);
         } catch (Exception e) {
             e.printStackTrace();
@@ -131,6 +131,39 @@ public class ViewDataBar {
     }
 
     /**
+     * Shows the person overview inside the root layout.
+     */
+    public void showEditCourse() {
+        try {
+            // Load person overview.
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/org/anubis/lectures/studentmngmtsys/course-overview.fxml")
+            );
+            if (loader.getLocation() == null) {
+                throw new IllegalStateException("Cannot find FXML 'course-overview.fxml'");
+            }
+            AnchorPane courseOverview = (AnchorPane) loader.load();
+            // Give the controller access to the storage.
+            CourseController courseCtrl = loader.getController();
+            courseCtrl.setCourseStorage(courseStorage);
+            // ← NEW: also give it a reference to this MainApp so showPersonEditDialog(...) works
+            courseCtrl.setMainApp(mainApp);
+            // ← inject the helper instance so viewDataBar is never null
+            courseCtrl.setViewDataBar(this);
+            rootLayout.setCenter(courseOverview);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Startup Error");
+            alert.setHeaderText("Unable to load UI");
+            alert.setContentText(ex.getMessage());
+            alert.showAndWait();
+            Platform.exit();
+        }
+    }
+
+    /**
      * Opens a dialog to edit details for the specified student. If the user
      * clicks OK, the changes are saved into the provided student object and true
      * is returned.
@@ -138,7 +171,7 @@ public class ViewDataBar {
      * @param student the student object to be edited
      * @return true if the user clicked OK, false otherwise.
      */
-    public boolean showPersonEditDialog(Student student) {
+    public boolean showStudentEditDialog(Student student) {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader(

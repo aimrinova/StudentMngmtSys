@@ -21,7 +21,7 @@ public class AllCoursesController {
     @FXML
     private TableColumn<Course, Number> courseVolumeColumn;
 
-    private CourseStorage storage;
+    private CourseStorage courseStorage;
 
     /**
      * Called by FXMLLoader to initialize the controller.
@@ -41,8 +41,8 @@ public class AllCoursesController {
     /**
      * Called by whoever loads this view to give access to the shared data.
      */
-    public void setStorage(CourseStorage storage) {
-        this.storage = storage;
-        courseTable.setItems(storage.getCourseData());
+    public void setCourseStorage(CourseStorage courseStorage) {
+        this.courseStorage = courseStorage;
+        courseTable.setItems(courseStorage.getCourseData());
     }
 }

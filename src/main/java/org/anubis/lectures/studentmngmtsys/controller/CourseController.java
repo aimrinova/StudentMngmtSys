@@ -35,7 +35,7 @@ public class CourseController {
     // Reference to the main application.
     private MainApp mainApp;
     private ViewDataBar viewDataBar;
-    private CourseStorage storage;
+    private CourseStorage courseStorage;
 
     /**
      * The constructor.
@@ -99,7 +99,7 @@ public class CourseController {
         Course tempCourse = new Course();
         boolean okClicked = viewDataBar.showCourseEditDialog(tempCourse);
         if (okClicked) {
-            storage.getCourseData().add(tempCourse);
+            courseStorage.getCourseData().add(tempCourse);
         }
     }
 
@@ -119,7 +119,7 @@ public class CourseController {
         } else {
             // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.initOwner(storage.getPrimaryStage());
+            alert.initOwner(courseStorage.getPrimaryStage());
             alert.setTitle("No Selection");
             alert.setHeaderText("No Course Selected");
             alert.setContentText("Please select a Course in the table.");
@@ -150,12 +150,12 @@ public class CourseController {
     /**
      * Is called by the main application to give a reference back to itself.
      *
-     * @param storage
+     * @param courseStorage
      */
-    public void setStorage(CourseStorage storage) {
-        this.storage = storage;
+    public void setCourseStorage(CourseStorage courseStorage) {
+        this.courseStorage = courseStorage;
         // Add observable list data to the table
-        courseTable.setItems(storage.getCourseData());
+        courseTable.setItems(courseStorage.getCourseData());
     }
 
     public void setViewDataBar(ViewDataBar viewDataBar) {

@@ -10,6 +10,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.anubis.lectures.studentmngmtsys.controller.RootLayoutController;
+import org.anubis.lectures.studentmngmtsys.model.CourseStorage;
 import org.anubis.lectures.studentmngmtsys.model.Student;
 import org.anubis.lectures.studentmngmtsys.model.StudentStorage;
 
@@ -37,15 +38,16 @@ public class MainApp extends Application {
         this.primaryStage.setTitle("Course Data");
         // 1) create storage (loads last file if any)
         StudentStorage storage = new StudentStorage(primaryStage);
+        CourseStorage courseStorage = new CourseStorage(primaryStage);
 
-        initRootLayout(storage);
+        initRootLayout(storage, courseStorage);
         //showStudent(storage);
     }
 
     /**
      * Initializes the root layout.
      */
-    public void initRootLayout(StudentStorage storage) {
+    public void initRootLayout(StudentStorage storage, CourseStorage courseStorage) {
         try {
             FXMLLoader rootLoader = new FXMLLoader();
             rootLoader.setLocation(
@@ -61,7 +63,7 @@ public class MainApp extends Application {
             // first give it the MainApp reference
             rootCtrl.setMainApp(this);
             // then give it the storage + layout
-            rootCtrl.setStorage(storage, rootLayout);
+            rootCtrl.setStorage(storage, courseStorage, rootLayout);
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
