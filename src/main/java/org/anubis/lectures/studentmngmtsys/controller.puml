@@ -1,0 +1,42 @@
+@startuml controller
+skinparam classAttributeIconSize 0
+
+package controller {
+  class AddStudentController {
+    - storage: StudentStorage
+    + setStorage(StudentStorage)
+    + handleSave()
+  }
+
+  class EditStudentController {
+    - storage: StudentStorage
+    - student: Student
+    + setStorage(StudentStorage)
+    + setStudent(Student)
+    + handleSave()
+  }
+
+  class EnrollByCourseController {
+    - storage: StudentStorage
+    + setStorage(StudentStorage)
+    + initialize()
+    + handleEnrollStudent()
+  }
+
+  class ViewDataBar {
+    - storage: StudentStorage
+    - rootLayout: BorderPane
+    + setStorage(StudentStorage)
+    + setRootLayout(BorderPane)
+    + handleShowStudents()
+    + handleShowCourses()
+    + handleShowEnrollments()
+  }
+
+  AddStudentController --> StudentStorage
+  EditStudentController --> StudentStorage
+  EnrollByCourseController --> StudentStorage
+  ViewDataBar --> StudentStorage
+  ViewDataBar --> BorderPane
+}
+@enduml

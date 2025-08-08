@@ -1,4 +1,4 @@
-package org.anubis.lectures.studentmngmtsys.views;
+package org.anubis.lectures.studentmngmtsys.controller;
 
 import org.anubis.lectures.studentmngmtsys.MainApp;
 import org.anubis.lectures.studentmngmtsys.model.StudentStorage;

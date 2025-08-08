@@ -1,0 +1,29 @@
+@startuml view
+skinparam classAttributeIconSize 0
+
+package view {
+  class MainApp {
+    + start(Stage)
+    + initRootLayout()
+    + showAddStudent()
+    + showEditStudent(Student)
+    + showEnrollByCourse()
+  }
+
+  class RootLayoutController {
+    - storage: StudentStorage
+    + setStorage(StudentStorage)
+  }
+
+  class AddStudent.fxml
+  class EditStudent.fxml
+  class EnrollByCourse.fxml
+  class RootLayout.fxml
+
+  MainApp --> RootLayoutController
+  MainApp --> AddStudent.fxml
+  MainApp --> EditStudent.fxml
+  MainApp --> EnrollByCourse.fxml
+  RootLayoutController --> RootLayout.fxml
+}
+@enduml

@@ -1,0 +1,55 @@
+@startuml model
+skinparam classAttributeIconSize 0
+
+package model {
+  class Student {
+    - id: String
+    - firstName: String
+    - lastName: String
+    - dob: LocalDate
+    - email: String
+    + getId(): String
+    + getFirstName(): String
+    + getLastName(): String
+    + getDob(): LocalDate
+    + getEmail(): String
+    + getFullName(): String
+  }
+
+  class Course {
+    - code: String
+    - title: String
+    + getCode(): String
+    + getTitle(): String
+  }
+
+  class CourseEnrollment {
+    - student: Student
+    - course: Course
+    - grade: String
+    + getStudent(): Student
+    + getCourse(): Course
+    + getGrade(): String
+    + setGrade(String)
+  }
+
+  class StudentStorage {
+    - students: ObservableList<Student>
+    - enrollments: ObservableList<CourseEnrollment>
+    + getStudentData(): ObservableList<Student>
+    + getEnrollmentData(): ObservableList<CourseEnrollment>
+    + addStudent(Student)
+    + updateStudent(Student)
+    + deleteStudent(Student)
+    + enroll(Student, Course)
+    + assignGrade(Student, Course, String)
+    + saveToFile(File)
+    + loadFromFile(File)
+  }
+
+  StudentStorage "1" o-- "*" Student
+  StudentStorage "1" o-- "*" CourseEnrollment
+  CourseEnrollment "*" --> "1" Student
+  CourseEnrollment "*" --> "1" Course
+}
+@enduml

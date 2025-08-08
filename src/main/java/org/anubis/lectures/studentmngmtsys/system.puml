@@ -1,0 +1,23 @@
+@startuml system
+skinparam classAttributeIconSize 0
+
+actor Admin
+
+MainApp --> RootLayoutController : initRootLayout()
+MainApp --> AddStudentController : showAddStudent()
+MainApp --> EditStudentController : showEditStudent()
+MainApp --> EnrollByCourseController : showEnrollByCourse()
+
+RootLayoutController --> ViewDataBar : setStorage()
+
+Admin --> MainApp : starts
+Admin --> AddStudentController : add student
+Admin --> EditStudentController : edit student
+Admin --> EnrollByCourseController : enroll students
+
+AddStudentController ..> StudentStorage
+EditStudentController ..> StudentStorage
+EnrollByCourseController ..> StudentStorage
+ViewDataBar ..> StudentStorage
+
+@enduml
