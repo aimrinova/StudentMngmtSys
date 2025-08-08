@@ -5,6 +5,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.util.StringConverter;
 import org.anubis.lectures.studentmngmtsys.model.*;
 
 public class EnrollByCourseController {
@@ -31,10 +32,22 @@ public class EnrollByCourseController {
         this.studentStorage = ss;
         this.courseStorage  = cs;
 
-        // Populate the choice‐box with all courses:
+        // 1) converter so Course → title
+        courseChoice.setConverter(new StringConverter<Course>() {
+            @Override
+            public String toString(Course c) {
+                return c == null ? "" : c.getCourseTitle();
+            }
+            @Override
+            public Course fromString(String string) {
+                return null;
+            }
+        });
+
+        // 2) *now* populate the choice box
         courseChoice.setItems(cs.getCourseData());
 
-        // When the user picks a course, show only its enrollments:
+        // 3) listener to update table when selection changes
         courseChoice.getSelectionModel().selectedItemProperty().addListener(
                 (obs, oldC, newC) -> {
                     if (newC != null) {

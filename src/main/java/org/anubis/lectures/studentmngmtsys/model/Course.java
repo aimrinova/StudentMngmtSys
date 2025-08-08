@@ -38,6 +38,14 @@ public class Course {
         this.courseVolume = new SimpleIntegerProperty(120);
     }
 
+    @Override
+    public String toString() {
+        return "Course{" +
+                "courseId=" + courseId +
+                ", courseTitle=" + courseTitle +
+                '}';
+    }
+
     public String getCourseId() { return courseId.get(); }
     public void setCourseID(String courseId) { this.courseId.set(courseId); }
     public StringProperty courseIdProperty() {

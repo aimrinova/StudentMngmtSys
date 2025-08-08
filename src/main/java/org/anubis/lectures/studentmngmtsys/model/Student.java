@@ -51,6 +51,15 @@ public class Student {
         this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
     }
 
+    @Override
+    public String toString() {
+        return "Student{" +
+                "firstName=" + firstName +
+                ", lastName=" + lastName +
+                ", studentId=" + studentId +
+                '}';
+    }
+
     public String getFirstName() {
         return firstName.get();
     }
